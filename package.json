@@ -1,0 +1,23 @@
+{
+  "name": "my-little-library-ionic",
+  "version": "1.0.0",
+  "description": "cliente side of my-little-library",
+  "main": "index.js",
+  "dependencies": {
+    "gulp-cli": "^1.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igormicael/my-little-library-ionic.git"
+  },
+  "author": "igor micael",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/igormicael/my-little-library-ionic/issues"
+  },
+  "homepage": "https://github.com/igormicael/my-little-library-ionic#readme"
+}
