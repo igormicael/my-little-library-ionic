@@ -48,7 +48,12 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers', 'conFusion.servic
         views: {
           'mainContent': {
             templateUrl: 'templates/mybooks.html',
-            controller: 'MyBooksController'
+            controller: 'MyBooksController',
+            resolve: {
+              mybooks : ['myBooksFactory', function (myBooksFactory) {
+                return myBooksFactory.query();
+              }]
+            }
           }
         }
       })

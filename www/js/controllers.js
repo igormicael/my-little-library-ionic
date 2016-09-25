@@ -40,10 +40,12 @@ angular.module('conFusion.controllers', [])
     $scope.message="Loading ...";
   }])
 
-  .controller('MyBooksController', ['$scope', 'baseURL', function($scope , baseURL) {
+  .controller('MyBooksController', ['$scope', 'mybooks', 'myBooksFactory', 'baseURL', function($scope , mybooks, myBooksFactory, baseURL) {
 
     $scope.baseURL = baseURL;
     $scope.message="Loading ...";
+    $scope.mybooks = mybooks;
+
   }])
 
   .controller('NewBooksController', ['$scope', 'baseURL', function($scope, baseURL) {

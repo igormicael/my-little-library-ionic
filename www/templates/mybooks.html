@@ -2,5 +2,24 @@
   <ion-nav-buttons side="secondary">
   </ion-nav-buttons>
   <ion-content>
+
+    <ion-list>
+      <ion-item ng-repeat="userBook in mybooks">
+        <div class="card">
+          <div class="item item-divider">
+            {{userBook.book.name}}
+          </div>
+
+          <div class="item item-text-wrap">
+            picture
+          </div>
+
+          <div class="item item-divider">
+            Reading Status
+          </div>
+        </div>
+
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

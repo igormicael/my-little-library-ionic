@@ -6,19 +6,29 @@
 
 //angular.module('confusionApp')
 angular.module('conFusion.services', ['ngResource'])
-  .constant("baseURL","http://localhost:3000/")
+  .constant("baseURL", "http://localhost:3000/")
 
-   .factory('corporateFactory', ['$resource', 'baseURL', function($resource,baseURL) {
+  .factory('corporateFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 
 
-    return $resource(baseURL+"leadership/:id");
+    return $resource(baseURL + "leadership/:id");
 
   }])
 
-  .factory('feedbackFactory', ['$resource', 'baseURL', function($resource,baseURL) {
+  .factory('feedbackFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 
 
-    return $resource(baseURL+"feedback/:id");
+    return $resource(baseURL + "feedback/:id");
+
+  }])
+
+  .factory('myBooksFactory',['$resource', 'baseURL', function ($resource, baseURL) {
+
+    return $resource(baseURL + "mybooks/:id", null, {
+      'update': {
+        method: 'PUT'
+      }
+    });
 
   }])
 
