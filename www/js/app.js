@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 //angular.module('starter', ['ionic', 'starter.controllers'])
-angular.module('conFusion', ['ionic', 'conFusion.controllers', 'conFusion.services'])
+angular.module('mll', ['ionic', 'mll.controllers', 'mll.services'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -52,6 +52,23 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers', 'conFusion.servic
             resolve: {
               mybooks : ['myBooksFactory', function (myBooksFactory) {
                 return myBooksFactory.query();
+              }]
+            }
+          }
+        }
+      })
+
+      .state('app.book', {
+        url: '/mybooks/:id',
+        views: {
+          'mainContent': {
+            templateUrl: 'templates/book.html',
+            controller: 'BookController',
+            resolve: {
+              userBook : ['$stateParams', 'myBooksFactory', function ($stateParams, myBooksFactory) {
+                return myBooksFactory.get({
+                  id: $stateParams.id
+                });
               }]
             }
           }

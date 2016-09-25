@@ -1,4 +1,4 @@
-angular.module('conFusion.controllers', [])
+angular.module('mll.controllers', [])
 
   .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
 
@@ -34,24 +34,59 @@ angular.module('conFusion.controllers', [])
     };
   })
 
-  .controller('IndexController', ['$scope', 'baseURL', function($scope, baseURL) {
+  .controller('IndexController', ['$scope', 'baseURL', function ($scope, baseURL) {
 
     $scope.baseURL = baseURL;
-    $scope.message="Loading ...";
+    $scope.message = "Loading ...";
   }])
 
-  .controller('MyBooksController', ['$scope', 'mybooks', 'myBooksFactory', 'baseURL', function($scope , mybooks, myBooksFactory, baseURL) {
+  .controller('MyBooksController', ['$scope', 'mybooks', 'myBooksFactory', 'baseURL', function ($scope, mybooks, myBooksFactory, baseURL) {
 
     $scope.baseURL = baseURL;
-    $scope.message="Loading ...";
+    $scope.message = "Loading ...";
+
+    $scope.filterText = '';
+    $scope.tab = 1;
     $scope.mybooks = mybooks;
 
+    $scope.select = function (setTab) {
+      $scope.tab = setTab;
+
+      if (setTab === 1) {
+        $scope.filtText = "READ";
+      } else if (setTab === 2) {
+        $scope.filtText = "READING";
+      } else if (setTab === 3) {
+        $scope.filtText = "RE-READING";
+      } else if (setTab === 4) {
+        $scope.filtText = "ABANDONED";
+      }
+    };
+
+    $scope.isSelected = function (checkTab) {
+      return ($scope.tab === checkTab);
+    };
+
   }])
 
-  .controller('NewBooksController', ['$scope', 'baseURL', function($scope, baseURL) {
+  .controller('BookController', ['$scope', 'userBook', 'myBooksFactory', 'baseURL', function ($scope, userBook, myBooksFactory, baseURL) {
+    $scope.baseURL = baseURL;
+    $scope.message = "Loading ...";
+
+    $scope.userBook = userBook;
+
+    $scope.SaveReview = function() {
+
+      myBooksFactory.update({_id: $scope.userBook.id }, $scope.userBook);
+
+    }
+
+  }])
+
+  .controller('NewBooksController', ['$scope', 'baseURL', function ($scope, baseURL) {
 
     $scope.baseURL = baseURL;
-    $scope.message="Loading ...";
+    $scope.message = "Loading ...";
   }])
 
 ;

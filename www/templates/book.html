@@ -1,0 +1,70 @@
+<ion-view view-title="">
+  <ion-content>
+
+    <div class="card">
+      <div class="item item-divider">
+        <h2>{{userBook.book.name}}</h2>
+      </div>
+
+      <div class="item item-body item-text-wrap">
+        <!--<img class="full-image" ng-src="{{book.picture}}" >-->
+        <img src="../img/my-books.jpg" width="130px"/>
+        <p>{{userBook.book.synopsis}}</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        <h2>Actions</h2>
+      </div>
+
+      <div class="item item-body">
+        <form id="reserveForm" name="reserveForm" ng-submit="SaveReview()">
+          <div class="list">
+
+            <label class="item item-input item-select">
+              <span class="input-label">Evaluation</span>
+              <select ng-model="userBook.evaluation">
+                <option ng-repeat="n in ['TERRIBLE','BAD','MEDIUM','GOOD','EXCELLENT']" value="{{n}}">{{n}}</option>
+              </select>
+            </label>
+
+            <label class="item item-input item-select">
+              <span class="input-label">Reading Status</span>
+              <select ng-model="userBook.readingStatus">
+                <option ng-repeat="n in ['READ','READING','RE-READING','ABANDONED']" value="{{n}}">{{n}}</option>
+              </select>
+            </label>
+
+            <label class="item item-input item-select">
+              <span class="input-label">Media Type</span>
+              <select ng-model="userBook.mediaType">
+                <option ng-repeat="n in ['ANALOGICAL','DIGITAL','AUDIO']" value="{{n}}">{{n}}</option>
+              </select>
+            </label>
+
+            <li class="item item-toggle"> Recommend?
+              <label class="toggle toggle-assertive">
+                <input type="checkbox" ng-model="userBook.recommend">
+                <div class="track">
+                  <div class="handle"></div>
+                </div>
+              </label>
+            </li>
+
+            <label class="item item-input">
+              <span class="input-label">Comment</span>
+              <input type="text" ng-model="userBook.comment">
+            </label>
+
+            <label class="item">
+              <button class="button button-block button-positive" type="submit">Save</button>
+            </label>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

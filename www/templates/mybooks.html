@@ -1,24 +1,40 @@
 <ion-view view-title="My Books">
-  <ion-nav-buttons side="secondary">
-  </ion-nav-buttons>
+  <div class="tabs-striped tabs-color-royal">
+    <ul class="tabs">
+      <li ng-class="{active:isSelected(1)}" class="tab-item">
+        <a ng-click="select(1)">READ</a>
+      </li>
+      <li ng-class="{active:isSelected(2)}" class="tab-item">
+        <a ng-click="select(2)">READING</a>
+      </li>
+      <li ng-class="{active:isSelected(3)}" class="tab-item">
+        <a ng-click="select(3)">RE-READING</a>
+      </li>
+      <li ng-class="{active:isSelected(4)}" class="tab-item">
+        <a ng-click="select(4)">ABANDONED</a>
+      </li>
+    </ul>
+  </div>
   <ion-content>
 
     <ion-list>
-      <ion-item ng-repeat="userBook in mybooks">
+      <ion-item ng-repeat="userBook in mybooks  | filter:{readingStatus:filtText}">
         <div class="card">
           <div class="item item-divider">
             {{userBook.book.name}}
           </div>
 
-          <div class="item item-text-wrap">
-            picture
+          <div class="item">
+            <a href="#/app/mybooks/{{userBook._id}}">
+              <!--<img ng-src="{{userBook.book.picture}}">-->
+              <img src="../img/my-books.jpg" width="130px"/>
+            </a>
           </div>
 
           <div class="item item-divider">
-            Reading Status
+            {{userBook.readingStatus}}
           </div>
         </div>
-
       </ion-item>
     </ion-list>
   </ion-content>
