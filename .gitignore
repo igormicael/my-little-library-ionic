@@ -1,3 +1,10 @@
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
+platforms/
+plugins/
+
+
 # Logs
 logs
 *.log
@@ -38,3 +45,9 @@ mongodb/data
 
 .idea/*
 
+dist
+.tmp
+.sass-cache
+bower_components
+.bowerrc
+.editorconfig
