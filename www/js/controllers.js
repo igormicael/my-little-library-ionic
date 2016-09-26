@@ -45,7 +45,7 @@ angular.module('mll.controllers', [])
     $scope.baseURL = baseURL;
     $scope.message = "Loading ...";
 
-    $scope.filterText = '';
+    $scope.filterText = 'READ';
     $scope.tab = 1;
     $scope.mybooks = mybooks;
 
@@ -53,13 +53,13 @@ angular.module('mll.controllers', [])
       $scope.tab = setTab;
 
       if (setTab === 1) {
-        $scope.filtText = "READ";
+        $scope.filterText = "READ";
       } else if (setTab === 2) {
-        $scope.filtText = "READING";
+        $scope.filterText = "READING";
       } else if (setTab === 3) {
-        $scope.filtText = "RE-READING";
+        $scope.filterText = "RE-READING";
       } else if (setTab === 4) {
-        $scope.filtText = "ABANDONED";
+        $scope.filterText = "ABANDONED";
       }
     };
 
@@ -69,7 +69,7 @@ angular.module('mll.controllers', [])
 
   }])
 
-  .controller('BookController', ['$scope', 'userBook', 'myBooksFactory', 'baseURL', function ($scope, userBook, myBooksFactory, baseURL) {
+  .controller('BookController', ['$scope','$state', 'userBook', 'myBooksFactory', 'baseURL', function ($scope, $state,  userBook, myBooksFactory, baseURL) {
     $scope.baseURL = baseURL;
     $scope.message = "Loading ...";
 
@@ -77,7 +77,9 @@ angular.module('mll.controllers', [])
 
     $scope.SaveReview = function() {
 
-      myBooksFactory.update({_id: $scope.userBook.id }, $scope.userBook);
+      myBooksFactory.update({_id: $scope.userBook.id }, $scope.userBook, function(){
+        $state.transitionTo('app.mybooks', {}, { reload: true, inherit: true, notify: true });//reload
+      });
 
     }
 

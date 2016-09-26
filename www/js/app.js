@@ -45,6 +45,7 @@ angular.module('mll', ['ionic', 'mll.controllers', 'mll.services'])
 
       .state('app.mybooks', {
         url: '/mybooks',
+        cache: false,
         views: {
           'mainContent': {
             templateUrl: 'templates/mybooks.html',

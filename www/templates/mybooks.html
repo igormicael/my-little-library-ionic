@@ -18,7 +18,7 @@
   <ion-content>
 
     <ion-list>
-      <ion-item ng-repeat="userBook in mybooks  | filter:{readingStatus:filtText}">
+      <ion-item ng-repeat="userBook in mybooks  | filter:{readingStatus:filterText}:true">
         <div class="card">
           <div class="item item-divider">
             {{userBook.book.name}}
