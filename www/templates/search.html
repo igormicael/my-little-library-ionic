@@ -1,0 +1,20 @@
+<ion-view view-title="Searching new books">
+  <ion-content>
+    <div class="list list-inset">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search" ng-model="filterText">
+      </label>
+      <label class="item item-text-wrap">
+        {{innerFilter}}
+      </label>
+    </div>
+
+    <ion-list>
+      <ion-item ng-repeat="book in books | filter:myFilter(innerFilter, filterText) " >
+        {{book.name}}
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+</ion-view>

@@ -69,26 +69,57 @@ angular.module('mll.controllers', [])
 
   }])
 
-  .controller('BookController', ['$scope','$state', 'userBook', 'myBooksFactory', 'baseURL', function ($scope, $state,  userBook, myBooksFactory, baseURL) {
+  .controller('BookController', ['$scope', '$state', 'userBook', 'myBooksFactory', 'baseURL', function ($scope, $state, userBook, myBooksFactory, baseURL) {
     $scope.baseURL = baseURL;
     $scope.message = "Loading ...";
 
     $scope.userBook = userBook;
 
-    $scope.SaveReview = function() {
+    $scope.SaveReview = function () {
 
-      myBooksFactory.update({_id: $scope.userBook.id }, $scope.userBook, function(){
-        $state.transitionTo('app.mybooks', {}, { reload: true, inherit: true, notify: true });//reload
+      myBooksFactory.update({_id: $scope.userBook.id}, $scope.userBook, function () {
+        $state.transitionTo('app.mybooks', {}, {reload: true, inherit: true, notify: true});//reload
       });
 
     }
 
   }])
 
-  .controller('NewBooksController', ['$scope', 'baseURL', function ($scope, baseURL) {
+  .controller('SearchController', ['$scope', '$stateParams', 'baseURL', 'booksFactory', 'books', function ($scope, $stateParams, baseURL, booksFactory, books) {
 
     $scope.baseURL = baseURL;
     $scope.message = "Loading ...";
+    $scope.books = books;
+    $scope.innerFilter = $stateParams.filter;
+
+    $scope.filterText;
+
+    $scope.myFilter = function (innerFilter) {
+      if (innerFilter === 'author') {
+        return '{author:filterText}'
+      } else {
+        return '{categories:filterText}'
+      }
+
+    }
+
   }])
 
-;
+  .filter('myFilter',function () {
+    return function (items, innerFilter, filterText) {
+      //console.log(items);
+      console.log(innerFilter);
+      console.log(filterText);
+
+
+      var newItems = [];
+      /*for (var i = 0; i < items.length; i++) {
+        if (items[i].price[category] > 0) {
+          newItems.push(items[i]);
+        }
+      }
+      ;*/
+
+      return newItems;
+    }
+  });

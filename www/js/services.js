@@ -17,4 +17,14 @@ angular.module('mll.services', ['ngResource'])
 
   }])
 
+  .factory('booksFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+    return $resource(baseURL + "books/:id", { id: '@_id' }, {
+      'update': {
+        method: 'PUT'
+      }
+    });
+
+  }])
+
 ;

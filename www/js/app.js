@@ -80,8 +80,22 @@ angular.module('mll', ['ionic', 'mll.controllers', 'mll.services'])
         url: '/newbooks',
         views: {
           'mainContent': {
-            templateUrl: 'templates/newbooks.html',
-            controller: 'NewBooksController'
+            templateUrl: 'templates/newbooks.html'
+          }
+        }
+      })
+
+      .state('app.search', {
+        url: '/search/:filter',
+        views: {
+          'mainContent': {
+            templateUrl: 'templates/search.html',
+            controller: 'SearchController',
+            resolve:{
+              books : ['booksFactory', function (booksFactory) {
+                return booksFactory.query();
+              }]
+            }
           }
         }
       })
