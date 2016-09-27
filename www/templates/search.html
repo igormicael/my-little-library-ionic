@@ -11,8 +11,13 @@
     </div>
 
     <ion-list>
-      <ion-item ng-repeat="book in books | filter:myFilter(innerFilter, filterText) " >
-        {{book.name}}
+      <ion-item ng-repeat="book in books | filter: filterText " class="item item-thumbnail-left">
+
+        <img ng-src="{{book.picture}}">
+        <h2>{{book.name}}</h2>
+        <p>{{book.synopsis}}</p>
+        <ion-option-button class="button-assertive icon ion-android-bookmark" ng-click="addBook( {{$index}} )">
+        </ion-option-button>
       </ion-item>
     </ion-list>
 

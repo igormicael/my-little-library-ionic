@@ -51,3 +51,5 @@ dist
 bower_components
 .bowerrc
 .editorconfig
+
+www/lib/

@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('mll.services', ['ngResource'])
-  .constant("baseURL", "http://localhost:3000/")
+  .constant("baseURL", "https://my-little-library.herokuapp.com/")
 
   .factory('myBooksFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 

@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 //angular.module('starter', ['ionic', 'starter.controllers'])
-angular.module('mll', ['ionic', 'mll.controllers', 'mll.services'])
+angular.module('mll', ['ionic', 'ngCordova', 'mll.controllers', 'mll.services'])
 
-  .run(function ($ionicPlatform) {
+  .run(function ($ionicPlatform, $rootScope, $ionicLoading, $cordovaSplashscreen, $timeout) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -51,7 +51,7 @@ angular.module('mll', ['ionic', 'mll.controllers', 'mll.services'])
             templateUrl: 'templates/mybooks.html',
             controller: 'MyBooksController',
             resolve: {
-              mybooks : ['myBooksFactory', function (myBooksFactory) {
+              mybooks: ['myBooksFactory', function (myBooksFactory) {
                 return myBooksFactory.query();
               }]
             }
@@ -66,7 +66,7 @@ angular.module('mll', ['ionic', 'mll.controllers', 'mll.services'])
             templateUrl: 'templates/book.html',
             controller: 'BookController',
             resolve: {
-              userBook : ['$stateParams', 'myBooksFactory', function ($stateParams, myBooksFactory) {
+              userBook: ['$stateParams', 'myBooksFactory', function ($stateParams, myBooksFactory) {
                 return myBooksFactory.get({
                   id: $stateParams.id
                 });
@@ -91,8 +91,8 @@ angular.module('mll', ['ionic', 'mll.controllers', 'mll.services'])
           'mainContent': {
             templateUrl: 'templates/search.html',
             controller: 'SearchController',
-            resolve:{
-              books : ['booksFactory', function (booksFactory) {
+            resolve: {
+              books: ['booksFactory', function (booksFactory) {
                 return booksFactory.query();
               }]
             }

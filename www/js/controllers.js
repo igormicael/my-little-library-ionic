@@ -1,6 +1,6 @@
 angular.module('mll.controllers', [])
 
-  .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
+  .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicPlatform) {
 
     // Form data for the login modal
     $scope.loginData = {};
@@ -85,41 +85,39 @@ angular.module('mll.controllers', [])
 
   }])
 
-  .controller('SearchController', ['$scope', '$stateParams', 'baseURL', 'booksFactory', 'books', function ($scope, $stateParams, baseURL, booksFactory, books) {
+  .controller('SearchController', ['$scope', '$stateParams', '$ionicListDelegate',
+    '$ionicPlatform', '$cordovaLocalNotification', 'baseURL', 'booksFactory', 'myBooksFactory',  'books',
+    function ($scope, $stateParams, $ionicListDelegate,
+              $ionicPlatform, $cordovaLocalNotification, baseURL, booksFactory, myBooksFactory, books) {
 
-    $scope.baseURL = baseURL;
-    $scope.message = "Loading ...";
-    $scope.books = books;
-    $scope.innerFilter = $stateParams.filter;
+      $scope.baseURL = baseURL;
+      $scope.message = "Loading ...";
+      $scope.books = books;
+      $scope.innerFilter = $stateParams.filter;
 
-    $scope.filterText;
+      $scope.filterText;
 
-    $scope.myFilter = function (innerFilter) {
-      if (innerFilter === 'author') {
-        return '{author:filterText}'
-      } else {
-        return '{categories:filterText}'
-      }
+      $scope.addBook = function (index) {
 
-    }
+        //esse valor é gerenciado pelo servidor
+        //$scope.userBook.user = req.decoded.id;
+        //$scope.userBook.book = index;
+        myBooksFactory.save({book : index});
 
-  }])
+        $ionicListDelegate.closeOptionButtons();
 
-  .filter('myFilter',function () {
-    return function (items, innerFilter, filterText) {
-      //console.log(items);
-      console.log(innerFilter);
-      console.log(filterText);
+        $ionicPlatform.ready(function () {
+          $cordovaLocalNotification.schedule({
+            id: 1,
+            title: "Added book to my bookshelf.",
+            text: $scope.books[index].name
+          }).then(function () {
+            console.log('Added book ' + $scope.books[index].name + ' to my bookshelf.');
+          }, function () {
+            console.log('Failed to add Notification ');
+          });
+        });
 
+      };
 
-      var newItems = [];
-      /*for (var i = 0; i < items.length; i++) {
-        if (items[i].price[category] > 0) {
-          newItems.push(items[i]);
-        }
-      }
-      ;*/
-
-      return newItems;
-    }
-  });
+    }]);
