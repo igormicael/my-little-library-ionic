@@ -5,8 +5,7 @@
 'use strict';
 
 angular.module('mll.services', ['ngResource'])
-  .constant("baseURL", "https://my-little-library.herokuapp.com/")
-
+  .constant("baseURL", "http://localhost:3000/")
 
   .factory('AuthFactory', ['$resource', '$http', '$localStorage', '$rootScope', 'baseURL', '$ionicPopup', function ($resource, $http, $localStorage, $rootScope, baseURL, $ionicPopup) {
 
@@ -110,6 +109,10 @@ angular.module('mll.services', ['ngResource'])
 
     authFac.getUsername = function () {
       return username;
+    };
+
+    authFac.getToken = function () {
+      return authToken;
     };
 
     authFac.facebook = function () {

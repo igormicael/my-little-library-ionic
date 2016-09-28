@@ -158,12 +158,10 @@ angular.module('mll.controllers', [])
 
       $scope.filterText;
 
+
       $scope.addBook = function (index) {
 
-        //esse valor é gerenciado pelo servidor
-        //$scope.userBook.user = req.decoded.id;
-        //$scope.userBook.book = index;
-        myBooksFactory.save({book : index});
+        myBooksFactory.save({book : books[index]._id });
 
         $ionicListDelegate.closeOptionButtons();
 
