@@ -5,7 +5,8 @@
 'use strict';
 
 angular.module('mll.services', ['ngResource'])
-  .constant("baseURL", "http://localhost:3000/")
+  .constant("baseURL", "https://my-little-library.herokuapp.com/")
+
 
   .factory('AuthFactory', ['$resource', '$http', '$localStorage', '$rootScope', 'baseURL', '$ionicPopup', function ($resource, $http, $localStorage, $rootScope, baseURL, $ionicPopup) {
 
